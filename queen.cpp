@@ -12,7 +12,7 @@ int isSafe(std::vector<std::vector<char>>&mat, int rows, int cols)
     // возвращаем 0, если два ферзя делят один и тот же столбец
     for (int i = 0; i < rows; i++)
     {
-        if (mat[i][cols] == 'Q') {
+        if (mat[i][cols] == 'X') {
             return 0;
         }
     }
@@ -20,7 +20,7 @@ int isSafe(std::vector<std::vector<char>>&mat, int rows, int cols)
     // вернуть 0, если два ферзя делят одну и ту же диагональ
     for (int i = rows, j = cols; i >= 0 && j >= 0; i--, j--)
     {
-        if (mat[i][j] == 'Q') {
+        if (mat[i][j] == 'X') {
             return 0;
         }
     }
@@ -28,7 +28,7 @@ int isSafe(std::vector<std::vector<char>>&mat, int rows, int cols)
     // вернуть 0, если два ферзя делят одну и ту же диагональ `/`
     for (int i = rows, j = cols; i >= 0 && j < S; i--, j++)
     {
-        if (mat[i][j] == 'Q') {
+        if (mat[i][j] == 'X') {
             return 0;
         }
     }
@@ -69,13 +69,13 @@ void nQueen(std::vector<std::vector<char>>& mat, int rows)
         if (isSafe(mat, rows, j))
         {
             // ставим ферзя на текущую клетку
-            mat[rows][j] = 'Q';
+            mat[rows][j] = 'X';
 
             // повторить для следующей строки
             nQueen(mat, rows + 1);
 
             // возвращаемся назад и удаляем ферзя с текущей клетки
-            mat[rows][j] = '-';
+            mat[rows][j] = '_';
         }
     }
 }
@@ -96,7 +96,7 @@ int main()
     for (int i = 0; i < S; i++)
     {
         for (int j = 0; j < S; j++)
-            mat[i][j] = '-';
+            mat[i][j] = '_';
     }
     nQueen(mat, 0);
     printf("Колличество возможных расстановок: %d\n", n_sol);
